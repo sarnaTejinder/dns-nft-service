@@ -72,9 +72,9 @@ const DomainForm = () => {
   }, [draft, editing]);
 
   const onSubmit = async () => {
-    // editing
-    //   ? await updateDomain({ domain: domainName.trim(), data: data.trim() })
-    //   : await mintDomain({ domain: domainName.trim(), data: data.trim() });
+    editing
+      ? await updateDomain({ domain: domainName.trim(), data: data.trim() })
+      : await mintDomain({ domain: domainName.trim(), data: data.trim() });
     setDraft({ name: "", record: "" });
     setEditing(false);
   };
