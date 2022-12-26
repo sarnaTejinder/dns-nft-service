@@ -64,6 +64,7 @@ export function MintProvider({ children }) {
 
         txn = await contract.attachDataToDomain(domain, data);
         await txn.wait();
+        fetchMints();
       } else {
         setError({ value: true, status: "mint domain" });
       }
