@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Card, Container, Form, InputGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Domains from "../../components/Domains";
@@ -9,6 +9,7 @@ import { animateScroll as scroll } from "react-scroll";
 
 export default function MintPage() {
   const { currentAccount, errorStatus } = useContext(WalletContext);
+  const { saving } = useContext(MintContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -28,6 +29,26 @@ export default function MintPage() {
         scrollBehavior: "smooth",
       }}
     >
+      {saving && (
+        <div
+          style={{
+            position: "absolute",
+            width: "100vw",
+            height: "100vh",
+            zIndex: 10000,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
+        >
+          <div>
+            <Card body style={{ width: 250 }} className="loading">
+              <span className="h5 ">Saving Please Wait!</span>
+            </Card>
+          </div>
+        </div>
+      )}
       <Container
         style={{
           height: "95vh",
