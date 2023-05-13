@@ -130,7 +130,8 @@ export function MintProvider({ children }) {
             };
           })
         );
-        setMints(mintRecords);
+        const reversedArray = mintRecords?.reverse();
+        setMints(reversedArray);
       }
     } catch (error) {
       setError({ value: true, status: "mint fetch" });

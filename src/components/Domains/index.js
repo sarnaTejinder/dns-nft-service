@@ -14,6 +14,7 @@ export default function Domains() {
     useContext(MintContext);
 
   const [darkMode, setDarkMode] = useState(true);
+
   return (
     <div
       style={{

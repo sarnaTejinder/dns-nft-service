@@ -90,10 +90,26 @@ export function WalletProvider({ children }) {
     }
   }, [ethereum]);
 
+  const accountChange = useCallback(() => {
+    if (ethereum) ethereum.on("accountsChanged", handleChainChanged);
+  }, [ethereum]);
+
   useEffect(() => {
     connectWallet();
     checkIfWalletIsConnected();
-  }, [connectWallet, checkIfWalletIsConnected, history]);
+    accountChange();
+    return () => {
+      if (ethereum) {
+        ethereum.removeListener("accountsChanged", handleChainChanged);
+      }
+    };
+  }, [
+    connectWallet,
+    checkIfWalletIsConnected,
+    history,
+    ethereum,
+    accountChange,
+  ]);
 
   return (
     <WalletContext.Provider
